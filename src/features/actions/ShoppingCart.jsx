@@ -62,10 +62,10 @@ function ShoppingCart({ cart, onClose, onRemove, onUpdateQuantity, total }) {
                     <p className="text-sm text-gray-600 mb-2">
                       ${item.price.toFixed(2)} each
                     </p>
-                    <div className="flex items-center gap-2">
+                    <div className="flex justify-center gap-2">
                       <button
                         onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                        className="w-7 h-7 flex items-center justify-center bg-white border border-gray-300 rounded hover:bg-gray-50"
+                        className="w-7 h-7 flex items-center justify-center bg-white border border-gray-300 text-white rounded hover:bg-gray-50"
                       >
                         −
                       </button>
@@ -75,22 +75,23 @@ function ShoppingCart({ cart, onClose, onRemove, onUpdateQuantity, total }) {
                       <button
                         onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
                         disabled={item.quantity >= item.stock}
-                        className="w-7 h-7 flex items-center justify-center bg-white border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-7 h-7 flex items-center justify-center bg-white border border-gray-300 text-white rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         +
                       </button>
-                      <button
-                        onClick={() => onRemove(item.id)}
-                        className="ml-auto text-red-600 hover:text-red-700 text-sm"
-                      >
-                        Remove
-                      </button>
+                      
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="flex flex-col space-y-6 text-center">
                     <p className="font-bold text-gray-900">
                       ${(item.price * item.quantity).toFixed(2)}
                     </p>
+                    <button
+                        onClick={() => onRemove(item.id)}
+                        className="ml-auto text-white hover:text-red-700 text-sm"
+                      >
+                        Remove
+                      </button>
                   </div>
                 </div>
               ))}

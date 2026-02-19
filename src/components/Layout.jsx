@@ -87,7 +87,7 @@ function Layout() {
                       <div className="flex-1 min-w-0">
                         <div className="font-medium">{item.name}</div>
                         <div className={`text-xs mt-0.5 ${
-                          isActive ? 'text-blue-100' : 'text-gray-500'
+                          isActive ? 'text-blue-300' : 'text-gray-500'
                         }`}>
                           {item.description}
                         </div>

@@ -90,7 +90,7 @@ function ActionsDemo() {
               onClick={() => setShowCart(!showCart)}
               className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors relative"
             >
-              <ShoppingCartIcon className="w-2 h-2" />
+              <ShoppingCartIcon className="w-4 h-4" />
               <span>Cart</span>
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
