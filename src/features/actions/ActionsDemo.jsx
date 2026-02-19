@@ -8,3 +8,5 @@ const ActionsDemo = () => {
     </div>
   );
 }   
+
+export default ActionsDemo;
