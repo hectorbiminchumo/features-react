@@ -52,27 +52,27 @@ function CartItem({ product: initialProduct }) {
   const total = (product.price * optimisticQuantity).toFixed(2);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4">
-      <div className="flex gap-4">
+    <div className="bg-white border border-gray-200 rounded-lg p-16 w-2xs">
+      <div className="flex flex-col items-center gap-4">
         <img
           src={product.image}
           alt={product.name}
           className="w-20 h-20 object-cover rounded"
         />
         
-        <div className="flex-1">
+        <div className="flex flex-col items-center">
           <h4 className="font-semibold text-gray-900">{product.name}</h4>
           <p className="text-sm text-gray-600 mb-2">
             ${product.price.toFixed(2)} each
           </p>
 
           {/* Quantity Controls */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col  gap-3">
             <div className="flex items-center gap-2 bg-gray-100 rounded-lg">
               <button
                 onClick={() => handleUpdateQuantity(optimisticQuantity - 1)}
                 disabled={optimisticQuantity <= 1}
-                className="w-8 h-8 flex items-center justify-center font-bold text-gray-700 hover:bg-gray-200 rounded-l-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-8 h-8 flex items-center justify-center font-bold text-white hover:bg-gray-200 rounded-l-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 −
               </button>
@@ -86,15 +86,15 @@ function CartItem({ product: initialProduct }) {
               <button
                 onClick={() => handleUpdateQuantity(optimisticQuantity + 1)}
                 disabled={optimisticQuantity >= product.stock}
-                className="w-8 h-8 flex items-center justify-center font-bold text-gray-700 hover:bg-gray-200 rounded-r-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-8 h-8 flex items-center justify-center font-bold text-white hover:bg-gray-200 rounded-r-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 +
               </button>
             </div>
 
-            <div className="text-right flex-1">
+            <div className="text-left flex-1">
               <p className="text-sm text-gray-600">Total:</p>
-              <p className={`text-lg font-bold ${
+              <p className={`text-lg text-center font-bold ${
                 isPending ? 'text-blue-600' : 'text-gray-900'
               }`}>
                 ${total}
@@ -135,7 +135,7 @@ function CartQuantity() {
 
   return (
     <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-      <div className="space-y-4">
+      <div className="flex flex-col items-center space-y-4">
         {cartProducts.map(product => (
           <CartItem key={product.id} product={product} />
         ))}
