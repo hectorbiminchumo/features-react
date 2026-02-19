@@ -1,5 +1,5 @@
-import { useActionState } from 'react';
 import FeatureCard from '../../components/FeatureCard';
+import ContactForm from './ContactForm';
 import { BoltIcon, ShoppingCartIcon } from '../../components/Icons';
 import ProductCard from './ProductCard';
 import ShoppingCart from './ShoppingCart';
@@ -121,7 +121,17 @@ function ActionsDemo() {
               />
             ))}
           </div>
-
+          {/* Additional Form Example */}
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              Form Validation Example
+            </h3>
+            <p className="text-gray-600 text-sm mb-6">
+              Here's a more complex example showing form validation, multiple field types,
+              and comprehensive error handling using useActionState.
+            </p>
+            <ContactForm />
+          </div>
           {/* Code Example */}
           <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
             <h4 className="font-semibold text-gray-900 mb-3">Code Example:</h4>
@@ -164,6 +174,50 @@ function AddToCartForm({ product }) {
     </form>
   );
 }`}
+            </pre>
+          </div>
+          {/* Code Example */}
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <h4 className="font-semibold text-gray-900 mb-3">Code Example:</h4>
+            <pre className="text-xs bg-gray-900 text-gray-100 p-4 rounded overflow-x-auto">
+{`// How the form action works:
+async function submitContactAction(prevState, formData) {
+  // 1. Extract form data
+  const name = formData.get('name')?.trim();
+  const email = formData.get('email')?.trim();
+  
+  // 2. Validate inputs
+  const errors = {};
+  if (!name || name.length < 2) {
+    errors.name = 'Name must be at least 2 characters';
+  }
+  
+  // 3. Return validation errors immediately
+  if (Object.keys(errors).length > 0) {
+    return { success: false, errors, message: 'Fix errors' };
+  }
+  
+  // 4. Make API call
+  try {
+    await api.submitContact(name, email);
+    return { 
+      success: true, 
+      message: 'Thank you!',
+      data: { name, email, ticketId: 'TICKET-123' }
+    };
+  } catch (error) {
+    return { 
+      success: false, 
+      message: error.message 
+    };
+  }
+}
+
+// 5. Use the hook
+const [state, formAction, isPending] = useActionState(
+  submitContactAction,
+  { success: false, errors: {}, message: '', data: null }
+);`}
             </pre>
           </div>
 
