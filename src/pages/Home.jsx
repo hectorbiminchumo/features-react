@@ -101,7 +101,7 @@ function Home() {
           Explore the latest features introduced in React 19.2 through interactive 
           e-commerce examples. Each demo showcases real-world use cases with mock data.
         </p>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
             <div className="text-sm text-gray-200">React Version</div>
             <div className="text-2xl font-bold">19.2</div>

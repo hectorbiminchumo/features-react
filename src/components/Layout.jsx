@@ -56,9 +56,9 @@ const navigationItems = [
 
 function Layout() {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex rounded-lg bg-gray-50">
       {/* Sidebar */}
-      <aside className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
+      <aside className="w-80 bg-white rounded-lg border-r border-gray-200 overflow-y-auto">
         <div className="p-6 border-b border-gray-200">
           <h1 className="text-2xl font-bold text-gray-900">React 19.2</h1>
           <p className="text-sm text-gray-600 mt-1">Feature Demonstrations</p>
@@ -115,7 +115,7 @@ function Layout() {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-7xl mx-auto p-8">
+        <div className="max-w-7xl rounded-lg mx-auto p-8">
           <Outlet />
         </div>
       </main>
