@@ -64,14 +64,14 @@ function ProductLikeCard({ product }) {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4">
-      <div className="flex gap-4">
+    <div className="bg-white border border-gray-200 rounded-lg p-16 w-2xs">
+      <div className="flex flex-col items-center gap-4">
         <img
           src={product.image}
           alt={product.name}
           className="w-24 h-24 object-cover rounded"
         />
-        <div className="flex-1">
+        <div className="flex flex-col items-center">
           <h4 className="font-semibold text-gray-900 mb-1">{product.name}</h4>
           <p className="text-sm text-gray-600 mb-3">{product.category}</p>
           
@@ -111,7 +111,7 @@ function LikeButton() {
 
   return (
     <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-      <div className="space-y-4">
+      <div className="flex flex-col items-center space-y-4 ">
         {products.map(product => (
           <ProductLikeCard key={product.id} product={product} />
         ))}

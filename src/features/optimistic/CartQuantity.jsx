@@ -1,4 +1,4 @@
-import { useOptimistic, useState } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 import { mockProducts } from '../../data/mockProducts';
 
 // Simulate API call
@@ -15,8 +15,11 @@ async function updateCartQuantity(productId, quantity) {
 function CartItem({ product: initialProduct }) {
   const [product, setProduct] = useState(initialProduct);
   const [error, setError] = useState(null);
+  
+  // useTransition is required for useOptimistic updates
+  const [isPending, startTransition] = useTransition();
 
-  // useOptimistic for quantity
+  // Optimistic state for quantity - updates instantly
   const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
     product.cartQuantity || 1,
     (current, newQuantity) => newQuantity
@@ -27,22 +30,25 @@ function CartItem({ product: initialProduct }) {
     
     setError(null);
     
-    // Optimistically update UI
-    setOptimisticQuantity(newQuantity);
+    // Wrap optimistic update in transition
+    startTransition(async () => {
+      // Update UI immediately (optimistic)
+      setOptimisticQuantity(newQuantity);
 
-    try {
-      // Server request
-      await updateCartQuantity(product.id, newQuantity);
-      
-      // Update real state
-      setProduct(prev => ({ ...prev, cartQuantity: newQuantity }));
-    } catch (err) {
-      setError(err.message);
-      setTimeout(() => setError(null), 3000);
-    }
+      try {
+        // Server request
+        await updateCartQuantity(product.id, newQuantity);
+        
+        // Update real state after confirmation
+        setProduct(prev => ({ ...prev, cartQuantity: newQuantity }));
+      } catch (err) {
+        // React automatically reverts to product.cartQuantity on error
+        setError(err.message);
+        setTimeout(() => setError(null), 3000);
+      }
+    });
   }
 
-  const isPending = product.cartQuantity !== optimisticQuantity;
   const total = (product.price * optimisticQuantity).toFixed(2);
 
   return (
@@ -65,7 +71,7 @@ function CartItem({ product: initialProduct }) {
             <div className="flex items-center gap-2 bg-gray-100 rounded-lg">
               <button
                 onClick={() => handleUpdateQuantity(optimisticQuantity - 1)}
-                disabled={optimisticQuantity <= 1 || isPending}
+                disabled={optimisticQuantity <= 1}
                 className="w-8 h-8 flex items-center justify-center font-bold text-gray-700 hover:bg-gray-200 rounded-l-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 −
@@ -79,7 +85,7 @@ function CartItem({ product: initialProduct }) {
               
               <button
                 onClick={() => handleUpdateQuantity(optimisticQuantity + 1)}
-                disabled={optimisticQuantity >= product.stock || isPending}
+                disabled={optimisticQuantity >= product.stock}
                 className="w-8 h-8 flex items-center justify-center font-bold text-gray-700 hover:bg-gray-200 rounded-r-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 +
