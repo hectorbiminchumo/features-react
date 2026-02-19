@@ -1,12 +1,10 @@
-import { useOptimistic, useState } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 import { mockProducts } from '../../data/mockProducts';
 
 // Simulate API call
 async function likeProduct(productId) {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1500));
   
-  // Simulate occasional error (10% chance)
   if (Math.random() < 0.1) {
     throw new Error('Network error. Please try again.');
   }
@@ -15,46 +13,54 @@ async function likeProduct(productId) {
 }
 
 function ProductLikeCard({ product }) {
-  const [likes, setLikes] = useState(product.reviews || 0);
-  const [isLiked, setIsLiked] = useState(false);
+  // Real server state
+  const [serverState, setServerState] = useState({
+    likes: product.reviews || 0,
+    isLiked: false
+  });
+  
   const [error, setError] = useState(null);
+  
+  // useTransition is required for useOptimistic updates
+  const [isPending, startTransition] = useTransition();
 
-  // useOptimistic for likes count
-  const [optimisticLikes, addOptimisticLike] = useOptimistic(
-    likes,
-    (currentLikes, increment) => currentLikes + increment
-  );
-
-  // useOptimistic for liked state
-  const [optimisticIsLiked, setOptimisticIsLiked] = useOptimistic(
-    isLiked,
-    (current, newValue) => newValue
+  // Optimistic state - updates instantly
+  const [optimisticState, setOptimisticState] = useOptimistic(
+    serverState,
+    (current, newState) => newState
   );
 
   async function handleLike() {
     setError(null);
     
-    const increment = optimisticIsLiked ? -1 : 1;
-    const newLikedState = !optimisticIsLiked;
+    // Calculate new state
+    const newIsLiked = !optimisticState.isLiked;
+    const newLikes = newIsLiked 
+      ? optimisticState.likes + 1 
+      : optimisticState.likes - 1;
     
-    // Optimistically update UI immediately
-    addOptimisticLike(increment);
-    setOptimisticIsLiked(newLikedState);
-
-    try {
-      // Server request happens in background
-      await likeProduct(product.id);
+    const newState = {
+      likes: newLikes,
+      isLiked: newIsLiked
+    };
+    
+    // Wrap optimistic update in transition
+    startTransition(async () => {
+      // Update UI immediately (optimistic)
+      setOptimisticState(newState);
       
-      // Update real state after server confirms
-      setLikes(prev => prev + increment);
-      setIsLiked(newLikedState);
-    } catch (err) {
-      // On error, React automatically reverts optimistic state
-      setError(err.message);
-      
-      // Error message will auto-clear after 3 seconds
-      setTimeout(() => setError(null), 3000);
-    }
+      try {
+        // Server processes in background
+        await likeProduct(product.id);
+        
+        // Update real state after confirmation
+        setServerState(newState);
+      } catch (err) {
+        // React automatically reverts to serverState on error
+        setError(err.message);
+        setTimeout(() => setError(null), 3000);
+      }
+    });
   }
 
   return (
@@ -72,13 +78,13 @@ function ProductLikeCard({ product }) {
           <button
             onClick={handleLike}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-              optimisticIsLiked
+              optimisticState.isLiked
                 ? 'bg-red-500 text-white hover:bg-red-600'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            <span className="text-xl">{optimisticIsLiked ? '❤️' : '🤍'}</span>
-            <span>{optimisticLikes} likes</span>
+            <span className="text-xl">{optimisticState.isLiked ? '❤️' : '🤍'}</span>
+            <span>{optimisticState.likes} likes</span>
           </button>
 
           {error && (
@@ -89,8 +95,8 @@ function ProductLikeCard({ product }) {
         </div>
       </div>
 
-      {/* Pending Indicator */}
-      {likes !== optimisticLikes && (
+      {/* Pending indicator */}
+      {isPending && (
         <div className="mt-3 pt-3 border-t border-gray-200 flex items-center gap-2 text-xs text-gray-600">
           <div className="animate-spin rounded-full h-3 w-3 border-2 border-gray-400 border-t-transparent"></div>
           <span>Syncing with server...</span>
@@ -112,9 +118,14 @@ function LikeButton() {
       </div>
 
       <div className="mt-4 bg-blue-50 border border-blue-200 rounded p-3 text-xs text-blue-800">
-        <strong>Try this:</strong> Click like multiple times rapidly. Notice how the UI 
-        updates instantly without waiting for the server. The optimistic state automatically 
-        reverts if an error occurs (10% chance simulated).
+        <strong>⚡ Try this:</strong> Click like and observe:
+        <ul className="list-disc list-inside mt-2 space-y-1">
+          <li><strong>The number changes INSTANTLY</strong> (doesn't wait for server)</li>
+          <li>The icon changes immediately: 🤍 → ❤️</li>
+          <li>"Syncing..." appears while server confirms (1.5s)</li>
+          <li>You can make multiple rapid clicks</li>
+          <li>If it fails (10% probability), the number automatically reverts</li>
+        </ul>
       </div>
     </div>
   );
