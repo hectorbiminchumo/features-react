@@ -95,7 +95,7 @@ function Home() {
       {/* Hero Section */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          React 19.2 Features Demo
+          React 19.2 
         </h1>
         <p className="text-xl text-gray-400 mb-6 max-w-3xl">
           Explore the latest features introduced in React 19.2 through interactive 
