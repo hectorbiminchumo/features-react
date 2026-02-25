@@ -1,19 +1,32 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { mockProducts } from '../../data/mockProducts';
 import { StarIcon } from '../../components/Icons';
 
 function ProductMetadata() {
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    setProductClicked(true);
+  };
+
   const [selectedProduct, setSelectedProduct] = useState(mockProducts[0]);
+  const [productClicked, setProductClicked] = useState(false);
+
+  useEffect(() => {
+    if (productClicked) {
+      document.title = `${selectedProduct.name} - React 19.2 Demo Store`;
+    } else {
+      document.title = 'React 19.2 Features Demo';
+    }
+  }, [selectedProduct, productClicked]);
 
   return (
     <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-      {/* Metadata tags - these get hoisted to <head> */}
+      {/* Metadata tags (except <title>) */}
       {selectedProduct && (
         <>
-          <title>{selectedProduct.name} - React 19.2 Demo Store</title>
           <meta name="description" content={selectedProduct.description} />
           <meta name="keywords" content={`${selectedProduct.category}, ${selectedProduct.name}, e-commerce`} />
-          
           {/* Open Graph tags for social media */}
           <meta property="og:type" content="product" />
           <meta property="og:title" content={selectedProduct.name} />
@@ -21,7 +34,6 @@ function ProductMetadata() {
           <meta property="og:image" content={selectedProduct.image} />
           <meta property="og:price:amount" content={selectedProduct.price} />
           <meta property="og:price:currency" content="USD" />
-          
           {/* Twitter Card */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={selectedProduct.name} />
@@ -37,7 +49,7 @@ function ProductMetadata() {
         {mockProducts.map((product) => (
           <button
             key={product.id}
-            onClick={() => setSelectedProduct(product)}
+            onClick={() => handleProductClick(product)}
             className={`text-left bg-white border-2 rounded-lg p-3 transition-all hover:shadow-md ${
               selectedProduct.id === product.id
                 ? 'border-primary shadow-md'

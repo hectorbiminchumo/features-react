@@ -1,4 +1,4 @@
-import { useOptimistic, useState, useActionState } from 'react';
+import { useState } from 'react';
 import FeatureCard from '../../components/FeatureCard';
 import { SparklesIcon } from '../../components/Icons';
 import ProductReviews from './ProductReviews';
@@ -99,34 +99,43 @@ function OptimisticDemo() {
           <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
             <h4 className="font-semibold text-gray-900 mb-3">Code Example:</h4>
             <pre className="text-xs bg-gray-900 text-gray-100 p-4 rounded overflow-x-auto">
-{`import { useOptimistic, useActionState } from 'react';
+{`import { useOptimistic, useTransition } from 'react';
 
 function LikeButton({ productId, initialLikes }) {
   const [likes, setLikes] = useState(initialLikes);
   
+  // useTransition is required for useOptimistic
+  const [isPending, startTransition] = useTransition();
+  
   // useOptimistic creates an optimistic version of state
-  const [optimisticLikes, addOptimisticLike] = useOptimistic(
+  const [optimisticLikes, setOptimisticLikes] = useOptimistic(
     likes,
     (currentLikes, newLikes) => newLikes
   );
 
-  async function likeAction() {
-    // Immediately update UI (optimistic)
-    addOptimisticLike(likes + 1);
+  async function handleLike() {
+    const newLikes = likes + 1;
     
-    try {
-      // Server request happens in background
-      const result = await api.likeProduct(productId);
-      setLikes(result.likes);  // Update with real data
-    } catch (error) {
-      // On error, React automatically reverts to 'likes'
-      console.error('Like failed:', error);
-    }
+    // Wrap optimistic update in transition
+    startTransition(async () => {
+      // Update UI immediately (optimistic)
+      setOptimisticLikes(newLikes);
+      
+      try {
+        // Server request happens in background
+        await api.likeProduct(productId);
+        setLikes(newLikes);  // Update with real data
+      } catch (error) {
+        // On error, React automatically reverts to 'likes'
+        console.error('Like failed:', error);
+      }
+    });
   }
 
   return (
-    <button onClick={likeAction}>
+    <button onClick={handleLike}>
       ❤️ {optimisticLikes} likes
+      {isPending && <span>Syncing...</span>}
     </button>
   );
 }
@@ -134,6 +143,7 @@ function LikeButton({ productId, initialLikes }) {
 // With forms and useActionState
 function AddReviewForm({ productId }) {
   const [reviews, setReviews] = useState([]);
+  const [isPending, startTransition] = useTransition();
   
   const [optimisticReviews, addOptimisticReview] = useOptimistic(
     reviews,
@@ -147,16 +157,18 @@ function AddReviewForm({ productId }) {
       pending: true  // Mark as pending
     };
     
-    // Show review immediately
-    addOptimisticReview(review);
-    
-    try {
-      const savedReview = await api.addReview(productId, review);
-      setReviews(prev => [...prev, savedReview]);
-      return { success: true };
-    } catch (error) {
-      return { success: false, message: error.message };
-    }
+    startTransition(async () => {
+      // Show review immediately
+      addOptimisticReview(review);
+      
+      try {
+        const savedReview = await api.addReview(productId, review);
+        setReviews(prev => [...prev, savedReview]);
+        return { success: true };
+      } catch (error) {
+        return { success: false, message: error.message };
+      }
+    });
   }
 
   const [state, formAction] = useActionState(submitReview, {});
@@ -213,6 +225,7 @@ function AddReviewForm({ productId }) {
               ⚠️ Important Notes
             </h4>
             <ul className="text-sm text-yellow-800 space-y-1">
+              <li>• useOptimistic updates must be wrapped in <code className="bg-yellow-100 px-1 rounded">startTransition</code></li>
               <li>• Optimistic state automatically reverts on component unmount or error</li>
               <li>• Best used with idempotent operations</li>
               <li>• Always handle errors gracefully</li>

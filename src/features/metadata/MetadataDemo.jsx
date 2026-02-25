@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import FeatureCard from '../../components/FeatureCard';
 import { DocumentTextIcon } from '../../components/Icons';
 import ProductMetadata from './ProductMetadata';

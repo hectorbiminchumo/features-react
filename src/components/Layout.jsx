@@ -56,15 +56,17 @@ const navigationItems = [
 
 function Layout() {
   return (
-    <div className="flex rounded-lg bg-gray-50">
-      {/* Sidebar */}
-      <aside className="w-80 bg-white rounded-lg border-r border-gray-200 overflow-y-auto">
-        <div className="p-6 border-b border-gray-200">
+    <div className="flex h-screen rounded-lg bg-gray-50">
+      {/* Sidebar - Fixed and scrollable */}
+      <aside className="w-80 bg-white rounded-lg border-r border-gray-200 flex flex-col fixed h-screen">
+        {/* Header - Fixed at top */}
+        <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <h1 className="text-2xl font-bold text-gray-900">React 19.2</h1>
           <p className="text-sm text-gray-600 mt-1">Feature Demonstrations</p>
         </div>
         
-        <nav className="p-4">
+        {/* Navigation - Scrollable */}
+        <nav className="flex-1 overflow-y-auto p-4">
           <ul className="space-y-2">
             {navigationItems.map((item) => (
               <li key={item.path}>
@@ -100,7 +102,8 @@ function Layout() {
           </ul>
         </nav>
         
-        <div className="p-6 border-t border-gray-200 mt-4">
+        {/* Footer - Fixed at bottom */}
+        <div className="p-6 border-t border-gray-200 flex-shrink-0">
           <div className="bg-blue-50 rounded-lg p-4">
             <h3 className="text-sm font-semibold text-blue-900 mb-2">
               About this Demo
@@ -113,9 +116,9 @@ function Layout() {
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-7xl rounded-lg mx-auto p-8">
+      {/* Main Content - Scrollable with margin for fixed sidebar */}
+      <main className="flex-1 ml-80 overflow-y-auto">
+        <div className="max-w-7xl mx-auto p-8">
           <Outlet />
         </div>
       </main>
