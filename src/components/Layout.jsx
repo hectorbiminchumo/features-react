@@ -7,7 +7,8 @@ import {
   DocumentTextIcon,
   PhotoIcon,
   CursorArrowRaysIcon,
-  WindowIcon
+  WindowIcon,
+  SignalIcon
 } from './Icons';
 
 const navigationItems = [
@@ -58,7 +59,14 @@ const navigationItems = [
     path: '/activity',
     icon: WindowIcon,
     description: 'Hide/show UI preserving state'
+  },
+  {
+    name: 'useEffectEvent',
+    path: '/effect-event',
+    icon: SignalIcon,
+    description: 'Separate events from effects'
   }
+
 ];
 
 function Layout() {
