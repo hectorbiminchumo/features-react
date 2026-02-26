@@ -8,6 +8,7 @@ import MetadataDemo from './features/metadata/MetadataDemo';
 import AssetsDemo from './features/assets/AssetsDemo';
 import RefPropDemo from './features/ref-prop/RefPropDemo';
 import ActivityDemo from './features/activity/ActivityDemo';
+import EffectEventDemo from './features/effect-event/EffectEventDemo';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="assets" element={<AssetsDemo />} />
         <Route path="ref-prop" element={<RefPropDemo />} />
         <Route path="activity" element={<ActivityDemo />} />
+        <Route path="effect-event" element={<EffectEventDemo />} />
       </Route>
     </Routes>
   );
