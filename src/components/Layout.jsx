@@ -6,7 +6,8 @@ import {
   SparklesIcon,
   DocumentTextIcon,
   PhotoIcon,
-  CursorArrowRaysIcon
+  CursorArrowRaysIcon,
+  WindowIcon
 } from './Icons';
 
 const navigationItems = [
@@ -51,6 +52,12 @@ const navigationItems = [
     path: '/ref-prop',
     icon: CursorArrowRaysIcon,
     description: 'New ref pattern'
+  },
+  {
+    name: 'Activity',
+    path: '/activity',
+    icon: WindowIcon,
+    description: 'Hide/show UI preserving state'
   }
 ];
 

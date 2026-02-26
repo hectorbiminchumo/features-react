@@ -7,6 +7,25 @@ import DynamicMetadata from './DynamicMetadata';
 function MetadataDemo() {
   return (
     <div className="space-y-8">
+      <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+  <h4 className="font-semibold text-orange-900 mb-2 flex items-center gap-2">
+    <span>⚠️</span>
+    <span>SSR Required for Full Functionality</span>
+  </h4>
+  <div className="text-sm text-orange-800 space-y-2">
+    <p>
+      Document Metadata features work best with <strong>Server-Side Rendering</strong>:
+    </p>
+    <ul className="list-disc list-inside space-y-1 ml-4">
+      <li><strong>Next.js (recommended):</strong> Full native support, works out of the box</li>
+      <li><strong>React SPA (this demo):</strong> Requires <code className="bg-orange-100 px-1 rounded">useEffect</code> and manual DOM manipulation</li>
+      <li><strong>Production:</strong> Use Next.js for real SEO and social media sharing</li>
+    </ul>
+    <p className="mt-2 text-xs">
+      This demo uses <code className="bg-orange-100 px-1 rounded">useEffect</code> to simulate the behavior for educational purposes.
+    </p>
+  </div>
+</div>
       <FeatureCard
         title="Document Metadata"
         description="Manage document title and meta tags natively in components"

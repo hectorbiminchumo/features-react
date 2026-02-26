@@ -8,6 +8,26 @@ import ResourcePreloading from './ResourcePreloading';
 function AssetsDemo() {
   return (
     <div className="space-y-8">
+      <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+  <h4 className="font-semibold text-orange-900 mb-2 flex items-center gap-2">
+    <span>⚠️</span>
+    <span>SSR Required for precedence Attribute</span>
+  </h4>
+  <div className="text-sm text-orange-800 space-y-2">
+    <p>
+      The <code className="bg-orange-100 px-1 rounded">precedence</code> attribute 
+      only works with <strong>Server-Side Rendering (Next.js)</strong>:
+    </p>
+    <ul className="list-disc list-inside space-y-1 ml-4">
+      <li><strong>Next.js:</strong> Native support for <code className="bg-orange-100 px-1 rounded">precedence="high|medium|low"</code></li>
+      <li><strong>React SPA:</strong> Cannot control CSS loading order natively</li>
+      <li><strong>This demo:</strong> Educational simulation of how it would work</li>
+    </ul>
+    <p className="mt-2 text-xs">
+      For production applications requiring optimized asset loading, migrate to Next.js App Router.
+    </p>
+  </div>
+</div>
       <FeatureCard
         title="Asset Loading"
         description="Preload and manage stylesheets, scripts, and other assets"
