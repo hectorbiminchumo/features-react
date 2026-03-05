@@ -49,12 +49,12 @@ const navigationItems = [
     icon: PhotoIcon,
     description: 'Preloading stylesheets and scripts'
   },
-  {
-    name: 'ref as Prop',
-    path: '/ref-prop',
-    icon: CursorArrowRaysIcon,
-    description: 'New ref pattern'
-  },
+  // {
+  //   name: 'ref as Prop',
+  //   path: '/ref-prop',
+  //   icon: CursorArrowRaysIcon,
+  //   description: 'New ref pattern'
+  // },
   {
     name: 'Activity',
     path: '/activity',

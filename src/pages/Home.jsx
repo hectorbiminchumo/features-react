@@ -76,19 +76,19 @@ const features = [
     ],
     color: 'from-orange-500 to-orange-600'
   },
-  {
-    title: 'ref as Prop',
-    path: '/ref-prop',
-    icon: CursorArrowRaysIcon,
-    description: 'Pass refs directly as props without forwardRef wrapper',
-    highlights: [
-      'Simpler API',
-      'No forwardRef needed',
-      'Better TypeScript support',
-      'Cleaner code'
-    ],
-    color: 'from-indigo-500 to-indigo-600'
-  },
+  // {
+  //   title: 'ref as Prop',
+  //   path: '/ref-prop',
+  //   icon: CursorArrowRaysIcon,
+  //   description: 'Pass refs directly as props without forwardRef wrapper',
+  //   highlights: [
+  //     'Simpler API',
+  //     'No forwardRef needed',
+  //     'Better TypeScript support',
+  //     'Cleaner code'
+  //   ],
+  //   color: 'from-indigo-500 to-indigo-600'
+  // },
   {
     title: 'Activity',
     path: '/activity',
