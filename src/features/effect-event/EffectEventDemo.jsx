@@ -18,12 +18,12 @@ function EffectEventDemo() {
               What is useEffectEvent in React 19.2?
             </h3>
             <div className="text-sm text-teal-800 space-y-2">
-              <p>
+              <p className='text-left mx-24'>
                 <code className="bg-teal-100 px-1 rounded">useEffectEvent</code> lets you extract 
                 non-reactive logic from your Effects into "Effect Events." These functions always read 
                 the <strong>latest</strong> props and state without causing the Effect to re-run.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-24 text-left">
                 <li>Solves the <strong>stale closure</strong> problem</li>
                 <li>No more unnecessary Effect re-runs</li>
                 <li>Replaces the manual <code className="bg-teal-100 px-1 rounded">useRef</code> workaround pattern</li>

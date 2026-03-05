@@ -125,11 +125,11 @@ function Home() {
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           React 19.2 
         </h1>
-        <p className="text-xl text-gray-400 mb-6 max-w-3xl">
+        <p className="text-xl text-gray-400 mb-6 max-w-3x text-center">
           Explore the latest features introduced in React 19.2 through interactive 
           e-commerce examples. Each demo showcases real-world usage patterns.
         </p>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
             ⚡ 8 Features
           </span>

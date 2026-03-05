@@ -44,7 +44,7 @@ function MetadataDemo() {
                 <code className="bg-green-100 px-1 rounded"> &lt;link&gt;</code> tags 
                 directly in components without needing third-party libraries like react-helmet.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-24 text-left">
                 <li>Native <code className="bg-green-100 px-1 rounded">&lt;title&gt;</code> tag support in components</li>
                 <li>Meta tags for SEO (description, keywords, Open Graph)</li>
                 <li>Automatic deduplication of duplicate tags</li>
