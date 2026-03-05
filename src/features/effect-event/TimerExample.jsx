@@ -99,7 +99,7 @@ function EffectEventTimer() {
 function TimerExample() {
   return (
     <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
-      <div className="grid md:grid-cols-2 divide-x divide-gray-200">
+      <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-y md:divide-y-0 divide-gray-200">
         {/* Broken */}
         <div className="p-4">
           <div className="flex items-center gap-2 mb-3">
