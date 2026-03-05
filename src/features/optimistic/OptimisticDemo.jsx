@@ -25,7 +25,7 @@ function OptimisticDemo() {
                 show an optimistic state while an async action is in progress. If the action 
                 fails, React automatically reverts to the previous state.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-20 text-left">
                 <li>Instant UI feedback (no waiting for server)</li>
                 <li>Automatic rollback on errors</li>
                 <li>Better perceived performance</li>

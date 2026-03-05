@@ -25,7 +25,7 @@ function RefPropDemo() {
                 as a prop to functional components without wrapping them 
                 in <code className="bg-indigo-100 px-1 rounded">forwardRef</code>.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-50 text-left">
                 <li>Simpler component API</li>
                 <li>No forwardRef wrapper needed</li>
                 <li>Better TypeScript support</li>

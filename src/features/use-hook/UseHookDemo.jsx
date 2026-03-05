@@ -23,7 +23,7 @@ function UseHookDemo() {
                 The <code className="bg-purple-100 px-1 rounded">use()</code> hook is a new React 19.2 
                 feature that allows you to read the value of a resource like a Promise or Context.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-16 text-left">
                 <li>Suspend on promises until they resolve</li>
                 <li>Read context values without useContext</li>
                 <li>Can be used conditionally (unlike other hooks)</li>

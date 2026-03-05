@@ -1,19 +1,16 @@
 function FeatureCard({ title, description, children, icon: Icon }) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="bg-gradient-to-r from-primary to-secondary p-6">
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex gap-1">
-
-          {Icon && <Icon className="w-8 h-8 " />}
-          
-            <h2 className="text-2xl font-bold ">{title}</h2>
+      <div className="bg-gradient-to-r from-primary to-secondary p-4 sm:p-6">
+        <div >
+          {Icon && <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white flex-shrink-0" />}
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-2xl font-bold truncate">{title}</h2>
+            <p className="text-gray-400 mt-1 text-sm">{description}</p>
           </div>
-            <p className=" mt-1">{description}</p>
-          
         </div>
       </div>
-      <div className="p-6">
+      <div className="p-3 sm:p-6 overflow-x-auto">
         {children}
       </div>
     </div>

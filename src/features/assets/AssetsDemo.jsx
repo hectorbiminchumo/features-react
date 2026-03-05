@@ -45,7 +45,7 @@ function AssetsDemo() {
                 stylesheets, scripts, fonts, and images with better control over loading 
                 priority and timing.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-18 text-left">
                 <li>Preload critical resources for better performance</li>
                 <li>Control stylesheet loading priority</li>
                 <li>Manage async/defer script loading</li>

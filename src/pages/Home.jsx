@@ -5,7 +5,9 @@ import {
   SparklesIcon,
   DocumentTextIcon,
   PhotoIcon,
-  CursorArrowRaysIcon
+  CursorArrowRaysIcon,
+  WindowIcon,
+  SignalIcon
 } from '../components/Icons';
 
 const features = [
@@ -74,18 +76,44 @@ const features = [
     ],
     color: 'from-orange-500 to-orange-600'
   },
+  // {
+  //   title: 'ref as Prop',
+  //   path: '/ref-prop',
+  //   icon: CursorArrowRaysIcon,
+  //   description: 'Pass refs directly as props without forwardRef wrapper',
+  //   highlights: [
+  //     'Simpler API',
+  //     'No forwardRef needed',
+  //     'Better TypeScript support',
+  //     'Cleaner code'
+  //   ],
+  //   color: 'from-indigo-500 to-indigo-600'
+  // },
   {
-    title: 'ref as Prop',
-    path: '/ref-prop',
-    icon: CursorArrowRaysIcon,
-    description: 'Pass refs directly as props without forwardRef wrapper',
+    title: 'Activity',
+    path: '/activity',
+    icon: WindowIcon,
+    description: 'Hide and show UI while preserving component state across navigations',
     highlights: [
-      'Simpler API',
-      'No forwardRef needed',
-      'Better TypeScript support',
-      'Cleaner code'
+      'State preserved when hidden',
+      'Effects cleaned up automatically',
+      'Pre-render upcoming content',
+      'Instant tab/page transitions'
     ],
-    color: 'from-indigo-500 to-indigo-600'
+    color: 'from-violet-500 to-violet-600'
+  },
+  {
+    title: 'useEffectEvent',
+    path: '/effect-event',
+    icon: SignalIcon,
+    description: 'Separate non-reactive logic from Effects to prevent unnecessary re-runs',
+    highlights: [
+      'Solves stale closures',
+      'No unnecessary Effect re-runs',
+      'Replaces useRef workaround',
+      'Linter-aware (ESLint v6+)'
+    ],
+    color: 'from-teal-500 to-teal-600'
   }
 ];
 
@@ -97,63 +125,32 @@ function Home() {
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           React 19.2 
         </h1>
-        <p className="text-xl text-gray-400 mb-6 max-w-3xl">
+        <p className="text-xl text-gray-400 mb-6 max-w-3x text-center">
           Explore the latest features introduced in React 19.2 through interactive 
-          e-commerce examples. Each demo showcases real-world use cases with mock data.
+          e-commerce examples. Each demo showcases real-world usage patterns.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-            <div className="text-sm text-gray-200">React Version</div>
-            <div className="text-2xl font-bold">19.2</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-            <div className="text-sm text-gray-200">Features</div>
-            <div className="text-2xl font-bold">{features.length}</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-            <div className="text-sm text-gray-200">Demo Type</div>
-            <div className="text-2xl font-bold">E-commerce</div>
-          </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+            ⚡ 8 Features
+          </span>
+          <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+            🛍️ E-commerce Examples
+          </span>
+          <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+            💻 Interactive Demos
+          </span>
         </div>
       </div>
 
       {/* What's New Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          What's New in React 19.2?
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          What's New in React 19.2
         </h2>
-        <div className="prose max-w-none text-gray-600">
-          <p className="mb-4">
-            React 19.2 introduces several powerful features that simplify common patterns 
-            and improve developer experience:
-          </p>
-          <ul className="space-y-2">
-            <li>
-              <strong>Actions API:</strong> A new paradigm for handling async operations 
-              with automatic state management
-            </li>
-            <li>
-              <strong>use() Hook:</strong> Read promises and context with more flexibility 
-              than traditional hooks
-            </li>
-            <li>
-              <strong>Optimistic Updates:</strong> Built-in support for instant UI feedback 
-              during async operations
-            </li>
-            <li>
-              <strong>Document Metadata:</strong> Native support for managing title and 
-              meta tags in components
-            </li>
-            <li>
-              <strong>Asset Loading:</strong> Better control over resource loading and 
-              performance optimization
-            </li>
-            <li>
-              <strong>Simplified Refs:</strong> No more forwardRef wrapper needed for 
-              passing refs to components
-            </li>
-          </ul>
-        </div>
+        <p className="text-gray-600 mb-6">
+          React 19.2 brings powerful new APIs for handling async operations, optimistic UI, 
+          state preservation, cleaner effects, and more. Click any feature below to explore.
+        </p>
       </div>
 
       {/* Features Grid */}
@@ -259,8 +256,9 @@ function Home() {
               Note about this demo
             </h4>
             <p className="text-sm text-blue-700">
-              All data is mocked and stored in memory. Actions and API calls simulate 
-              real-world scenarios with artificial delays to demonstrate async behavior.
+              This demo requires <strong>React 19.2+</strong>. Features like Activity and 
+              useEffectEvent are new in 19.2. All data is mocked and stored in memory. 
+              Actions and API calls simulate real-world scenarios with artificial delays.
             </p>
           </div>
         </div>

@@ -18,13 +18,13 @@ function ActivityDemo() {
               What is {'<Activity>'} in React 19.2?
             </h3>
             <div className="text-sm text-violet-800 space-y-2">
-              <p>
+              <p className='text-left mx-24'>
                 <code className="bg-violet-100 px-1 rounded">{'<Activity>'}</code> lets you hide parts 
                 of your UI <strong>without destroying their state</strong>. Unlike conditional rendering 
                 (<code className="bg-violet-100 px-1 rounded">{'isVisible && <Component />'}</code>), 
                 Activity preserves React state, DOM state, and scroll position.
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-24 text-left">
                 <li>Two modes: <code className="bg-violet-100 px-1 rounded">visible</code> and <code className="bg-violet-100 px-1 rounded">hidden</code></li>
                 <li>Hidden components keep their state in memory</li>
                 <li>Effects are cleaned up when hidden, restored when visible</li>

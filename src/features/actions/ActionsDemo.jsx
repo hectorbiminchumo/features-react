@@ -64,7 +64,7 @@ function ActionsDemo() {
                 <strong>Actions</strong> are a new way to handle async operations in React 19. 
                 The <code className="bg-blue-100 px-1 rounded">useActionState</code> hook provides:
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-40 text-left">
                 <li>Automatic pending state management</li>
                 <li>Built-in error handling</li>
                 <li>Access to form data automatically</li>

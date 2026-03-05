@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent horizontal overflow on mobile */
+html, body, #root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Fix pre/code blocks from breaking layout on mobile */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  word-break: break-word;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
